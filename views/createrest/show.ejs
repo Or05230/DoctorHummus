@@ -1,0 +1,64 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">דוקטור חומוס</p>
+            <div class="list-group">
+                <li class="list-group-item active">מידע</li>
+                <li class="list-group-item"></li>
+                <li class="list-group-item"></li>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="thumbnail">
+                <img class="img-responsive" id="imgchecker" src="<%= hummus.image %>">
+                <div class="caption-full">
+                    <h4 class="pull-left">₪<%= hummus.price %> :מנה</h4>
+                    <h4><a><%=hummus.name%></a></h4>
+                    <p><%= hummus.description %></p>
+                    <p>ציון:<%= hummus.rating %>/10</p>
+                    <p>
+               <em> נוסף על ידי <%= hummus.author.username %> </em>
+                   </p>
+                   <% if(currentUser && hummus.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+                     <a class="btn btn-xs btn-warning" href="/restaurant/<%= hummus._id %>/edit">ערוך</a>
+                      <form class="delete-form" action="/restaurant/<%= hummus._id %>?_method=DELETE" method="POST">
+                         <button class="btn btn-xs btn-danger">מחק</button>
+                      </form>
+                   <% } %>
+                </div>
+            </div>
+            <div class="well">
+                <div class="text-right">
+                    <a href="/restaurant/<%= hummus._id %>/comments/new" class="btn btn-success">הוסף תגובה</a>
+                </div>
+                <hr>
+                <% hummus.comments.forEach(function(comment){ %>
+                <div class="row">
+                    <div class="col-md-12">
+                       <strong><%= comment.author.username %></strong>
+                        <span class="pull-right"></span> 
+                         <p>
+                        <%= comment.text %>  
+                        </p>
+                         <% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+                        <a class="btn btn-xs btn-warning" 
+                        href="/restaurant/<%=hummus._id %>/comments/<%= comment._id %>/edit">ערוך</a>
+                        <form class="delete-form" action="/restaurant/<%=hummus._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                         <input type="submit" class="btn btn-xs btn-danger" value="מחק">                       
+                        </form>
+                        <% } %>
+                    </div>
+                </div>
+                    <% }) %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<% include ../partials/footer %>

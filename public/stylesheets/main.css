@@ -1,0 +1,30 @@
+.thumbnail img {  /*all image tags inside of thumbnails*/
+    width: 100%;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.caption-full {
+    padding: 9px ;
+}
+
+.delete-form {
+    display: inline; 
+}
+body{
+    direction: rtl !important;
+}
+
+body {
+   font-family: 'Rubik', sans-serif;
+}
+
+.jumbotron {
+    background-image: url("http://www.dreamrestaurant.in/blog/wp-content/uploads/2017/12/cropped-Header_event.jpg");
+    color: white;
+}
+#imgchecker {
+   max-height: 500px;
+}
